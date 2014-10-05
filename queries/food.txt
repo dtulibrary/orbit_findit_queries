@@ -1,0 +1,1 @@
+(af:("DTU food") OR af:("DTU fødevareinstituttet") OR af:("danis* inst* foo*") OR af:("danish foo*") OR af:("Natl Food Inst*") OR af:("Natl Food Res* Inst*") OR af:("Natl Inst* Food*")  OR af:("National Food Institute")) AND af:(lyngby OR københavn OR copenhagen OR denmark OR danmark OR soborg OR søborg OR soeborg)

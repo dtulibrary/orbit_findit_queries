@@ -1,0 +1,8 @@
+af:("Nuclear Technologies")
+OR (af:("DTU Nutech")
+OR af:("Nucl Technol")
+OR af:("Dept Nucl Technol")
+OR af:("Center for Nuclear Technologies")
+OR af:("Centre for Nuclear Technologies")
+OR af:("Department of Nuclear Technologies"))
+AND af:(Risoe OR Risø OR Roskilde OR Lyngby OR Danmark OR Denmark)

@@ -1,0 +1,1 @@
+(af:("natl space inst") OR af:("DTU space") OR af:("national space institute") OR ("national space center") OR af:("institut for rumforskning og teknologi") OR af:("danish space res inst") OR af:("danish natl space") OR af:("DTU-National Space Institute") OR af:("microwave remote sensing sect")) AND af:(lyngby OR københavn OR copenhagen OR denmark OR danmark)

@@ -1,0 +1,13 @@
+(af:("Management Engineering")
+OR af:("dtu man")
+OR af:("dtu management engineering")
+OR af:("dtu management")
+OR af:("management eng")
+OR af:("management engn")
+OR af:("manag eng")
+OR af:UNEP
+OR af:("technical university of denmark, department of management engineering")
+OR af:("department of management engineering, technical university of denmark")
+OR af:("DTU Mekanik"))
+AND af:(Risoe OR Risø OR Roskilde OR Lyngby OR Danmark OR Denmark OR
+Copenhagen)

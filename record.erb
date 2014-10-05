@@ -1,0 +1,32 @@
+<hr/>
+<div class="row">
+  <div class="span1">
+    <h6><%= index %>.</h6>
+  </div>
+  <div class="span5 non-orbit-record">
+    <h6><%= record[:title_ts].try(:first) %></h6>
+    <% if record[:author_ts] && record[:author_ts].count < 10 %>
+      <p><%= record[:author_ts].join('<br/>') %></p>
+    <% elsif record[:author_ts] %>
+      <p><%= record[:author_ts].slice(0,10).join('<br/>') %><em> and <%= record[:author_ts].count-10 %> more </em></p>
+    <% end %>
+    <% if record[:affiliation_ts] && record[:affiliation_ts].count < 10 %>
+      <p><%= record[:affiliation_ts].join('<br/>') %></p>
+    <% elsif record[:affiliation_ts] %>
+      <p><%= record[:affiliation_ts].slice(0,10).join('<br/>') %><em> and <%= record[:affiliation_ts].count-10 %> more </em></p>
+    <% end %>
+    <p><%= record[:journal_title_ts].try(:first) || record[:conf_title_ts].try(:first) %>, <%= [record['pub_date_tis'], record['journal_vol_ssf'], record['journal_issue_ssf'], record['journal_page_ssf']].join(',') %></p>
+    <a target="_blank" href="http://findit.dtu.dk/catalog/<%= record[:cluster_id_ss].first %>">Findit</a> -- <a target="_blank" href="http://orbit.dtu.dk/en/searchall.html?searchall=<%= record[:title_ts].try(:first) %>">Orbit search (title)</a> -- <a target="_blank" href="http://orbit.dtu.dk/en/publications/search.html?search=<%= record[:author_words].join(' ') %>">Orbit search (authors)</a>
+    <!-- <%= record[:query] %> -->
+  </div>
+  <% if record[:duplicate] %>
+    <div class="span5 orbit-record">
+      <h6><%= record[:duplicate]['title_ts'].try(:first) %></h6>
+      <p><%= (record[:duplicate]['author_ts'] || []).join('<br/>') %></p>
+      <p><%= (record[:duplicate]['affiliation_ts'] || []).join('<br/>') %></p>
+      <p><%= (record[:duplicate]['journal_title_ts'] || record[:duplicate]['conf_title_ts'] || []).first %>, <%= ([record[:duplicate]['pub_date_tis'], record[:duplicate]['journal_vol_ssf'], record[:duplicate]['journal_issue_ssf'], record[:duplicate]['journal_page_ssf']].join(',') || '') %></p>
+      <a target="_blank" href="http://orbit.dtu.dk/en/publications/id(<%= record[:duplicate]['source_id_ss'].find{|s| s.starts_with?('orbit')}.split(':').last %>).html">Orbit</a>
+    </div>
+  <% end %>
+</div>
+<hr/>

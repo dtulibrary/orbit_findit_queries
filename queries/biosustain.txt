@@ -1,0 +1,1 @@
+(af:("DTU biosustain") OR af:(biosustainabil*) OR af:("Novo Nordisk Foundation Center for Biosustainability") OR af:("Novo Nordisk Fdn Ctr Biosustainabil")) AND af:(hørsholm OR horsholm OR lyngby OR denmark OR copenhagen OR danmark OR københavn OR kobenhavn)
