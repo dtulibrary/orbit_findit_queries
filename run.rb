@@ -32,7 +32,7 @@ if ARGV.count > 0
       cursorMark = '*'
       loop do
         result = solr.get('toshokan', :params => {:fq => filters + ['-source_ss:orbit'],
-            :q => q, :qf => '*', :cursorMark => cursorMark, :rows => 100, :sort => 'id asc', 
+            :q => q, :cursorMark => cursorMark, :rows => 100, :sort => 'id asc', 
             :fl => fields, :facet => false})
         docs = result['response']['docs']
 
