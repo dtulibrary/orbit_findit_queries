@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8" />
     <title>miljø</title>
-    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.2/css/bootstrap-responsive.min.css"/>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
 </head>
@@ -23,7 +24,8 @@
       <p>Department of Environmental EngineeringTechnical University of Denmark, Kongens Lyngby Denmark, philm@env.dtu.dk<br/>Department of Physical and Environmental SciencesUniversity of Toronto Scarborough, Toronto Ontario Canada, frank.wania@utoronto.ca<br/>Richardson College for the EnvironmentUniversity of Winnipeg, Winnipeg Manitoba Canada, ch.wong@uwinnipeg.ca</p>
     
     <p>Environmental Science. Processes and Impacts, 2014,16,3,366-368</p>
-    <a target="_blank" href="http://findit.dtu.dk/catalog/260417312">Findit</a> -- <a target="_blank" href="http://orbit.dtu.dk/en/searchall.html?searchall=Advancing passive sampling of contaminants in environmental science.">Orbit search (title)</a> -- <a target="_blank" href="http://orbit.dtu.dk/en/publications/search.html?search=Mayer Wania Wong">Orbit search (authors)</a>
+    <a target="_blank" href="http://findit.dtu.dk/catalog/260417312">Findit</a> -- <a target="_blank" href="http://orbit.dtu.dk/en/searchall.html?searchall=Advancing passive sampling of contaminants in environmental science.">Orbit search (title)</a> -- <a target="_blank" href="http://orbit.dtu.dk/en/publications/search.html?search=Mayer Wania Wong">Orbit search (authors)</a> 
+    <br/><input class="form-control input-sm" type="text" value="cluster_id_ss:260417312" readonly/>
     <!--  title_ts:(Advancing passive sampling of contaminants in environmental) author_ts:(Mayer Wania Wong) journal_title_ts:(Environmental Processes and Impacts) -->
   </div>
   
@@ -31,5 +33,10 @@
 <hr/>
 
   </div>
+  <script >
+   $('input').click(function () {
+     this.select();
+   });    
+  </script>
 </body>
 </html>

@@ -16,7 +16,8 @@
       <p><%= record[:affiliation_ts].slice(0,10).join('<br/>') %><em> and <%= record[:affiliation_ts].count-10 %> more </em></p>
     <% end %>
     <p><%= record[:journal_title_ts].try(:first) || record[:conf_title_ts].try(:first) %>, <%= [record['pub_date_tis'], record['journal_vol_ssf'], record['journal_issue_ssf'], record['journal_page_ssf']].join(',') %></p>
-    <a target="_blank" href="http://findit.dtu.dk/catalog/<%= record[:cluster_id_ss].first %>">Findit</a> -- <a target="_blank" href="http://orbit.dtu.dk/en/searchall.html?searchall=<%= record[:title_ts].try(:first) %>">Orbit search (title)</a> -- <a target="_blank" href="http://orbit.dtu.dk/en/publications/search.html?search=<%= record[:author_words].join(' ') %>">Orbit search (authors)</a>
+    <a target="_blank" href="http://findit.dtu.dk/catalog/<%= record[:cluster_id_ss].first %>">Findit</a> -- <a target="_blank" href="http://orbit.dtu.dk/en/searchall.html?searchall=<%= record[:title_ts].try(:first) %>">Orbit search (title)</a> -- <a target="_blank" href="http://orbit.dtu.dk/en/publications/search.html?search=<%= record[:author_words].join(' ') %>">Orbit search (authors)</a> 
+    <br/><input class="form-control input-sm" type="text" value="cluster_id_ss:<%= record[:cluster_id_ss].first %>" readonly/>
     <!-- <%= record[:query] %> -->
   </div>
   <% if record[:duplicate] %>
