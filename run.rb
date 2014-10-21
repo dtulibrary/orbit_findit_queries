@@ -18,7 +18,18 @@ departments = {}
 
 if ARGV.count > 0
   doc_ids    = Set.new
+  found_ids  = Set.new 
   solr = RSolr.connect :url => url
+
+  Dir.glob("found/*.json").each do |f|
+    found = JSON.parse(File.read(f))
+    found.each do |_, docs| 
+      docs.each do |id, _| 
+        found_ids.add(id)
+      end
+    end
+  end
+
 
   # loop through each department and iterate over queries in file
   # execute each query and return 
@@ -44,6 +55,7 @@ if ARGV.count > 0
 
         docs.each do |doc|
           next if doc_ids.include? doc['id']
+          next if found_ids.include? doc['id']
           doc_ids.add doc['id']
           departments[department][doc['id']] = doc
         end
