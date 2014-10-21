@@ -1,1 +1,1 @@
-(af:("dtu fysik") OR af:("dtu physics") OR af:("department of physics")  OR af: ("Dept Phys") OR af:("institut for fysik")) AND af:(lyngby OR Roskilde)
+(af:("dtu fysik") OR af:("dtu physics") OR af:("department of physics") OR af:("Dept Phys") OR af:("institut for fysik")) AND af:(lyngby OR Roskilde)
