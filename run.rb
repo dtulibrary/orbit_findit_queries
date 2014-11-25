@@ -33,7 +33,7 @@ if ARGV.count > 0
 
   # loop through each department and iterate over queries in file
   # execute each query and return 
-  Dir.glob("queries/*.txt").each do |f|
+  ARGV.each do |f|
     department = File.basename(f, '.txt')
     departments[department] = {}
 
@@ -86,7 +86,7 @@ if ARGV.count > 0
     print [dep, docs.count].inspect
     docs.each do |id, doc|
       title = doc['title_ts'].first
-      authors = doc['author_ts']
+      authors = doc['author_ts'] || []
       journal_title = doc['journal_title_ts'].try(:first) || ""
       conf_title = doc['conf_title_ts'].try(:first) || ""
 
@@ -120,6 +120,8 @@ else
   end
 
 end
+
+FileUtils.rm_f Dir.glob('Orbit-*.html')
 
 template = Tilt::ERBTemplate.new("layout.erb")
 departments.each do |dep, docs|
