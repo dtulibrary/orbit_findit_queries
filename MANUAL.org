@@ -1,0 +1,82 @@
+#+TITLE: OrbitFinditQueries: The Missing Manual
+#+OPTIONS: toc:1 num:nil -:nil
+
+* High-Level Overview
+  The script runs a series of queries (given in a list of
+  files). Currently the defined queries is found in the directory
+  `queries`. One file per department (plus a single file with very
+  general queries). Each file may contain several queries separated by
+  empty lines.
+
+  The "algorithm" run in three stages.
+
+  1. In the first stage each query is executed against the Solr index
+     with a set of additional filters. Most notable we filter by
+     publication year and exclude records with include a member from
+     source:orbit (since these are already registered in orbit). The
+     result of the stage is a datastructure
+     #+BEGIN_EXAMPLE
+     { department1 => { dedupkey1 => document1,
+                        dedupkey2 => document2,
+                        .
+                        .
+                        dedupkey8 => document8
+                      }
+       .
+       .
+       .
+       department9 => { dedupkey101 => document101,
+                        dedupkey102 => document102,
+                        .
+                        .
+                        dedupkey108 => document108
+                      }
+       }
+     #+END_EXAMPLE
+
+     where department names are deduced from the names of the file
+     containing the query.
+
+     _Note_ that a given dedupkey is only listed once even if the
+     corresponding document is found by multiple queries. Specifically
+     it is listed on the department of the first executed query that
+     matches. Due to this behaviour, it is important that the generic
+     queries are executed last.
+
+     _Note_ also that any dedupkey that exists in one of the files in
+     ~found/*.json~ is not included in the datastructure - they are
+     considered already reported for registration and are thus no
+     longer interesting.
+
+  2. In the next stage each document in the datastructure from stage 1
+     is evaluated to find a possible document in source:orbit that
+     represent the same publication. If such a duplicate is found, it
+     may indicate that the publication has already been registered. In
+     practice this is done by extracting words from the title, author
+     last-names, and host publication title; generating a fuzzy
+     (mm=75%) query from these; and executing this query with
+     source:orbit as filter. The top (if any) document is stored in
+     the datastructure above along each document.
+
+  3. In the final stage a number of html-documents (one document per
+     department) is generated from the datastructure. Each document
+     becomes a row in the document, listed along-side it's possible
+     duplicate. A number of utility-links to Findit and Orbit are
+     rendered below each document.
+
+* A run
+  1. ~bundle exec ruby run.rb queries/*.txt~
+  2. With $X=1 + max_{x \in \mathtt{`ls\ found/*`}} basename(x)$.
+     I.e. next number in sequence of files in ~found/~.
+     3. Email all ~Orbit-*.html~ to relevant persons. Subject: "Lister
+        runde ${X}"
+     4. cp candidate.json found/${X}.json
+     5. git add -A .
+     6. git commit -m "Round ${X}"
+     7. git push origin master
+
+If you want to discard the results of a run just ~$ git checkout .~
+
+* Starting a new registration year.
+  1. ~mv found found_${previous_year}~
+  2. ~mkdir found~
