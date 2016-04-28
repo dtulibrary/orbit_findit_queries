@@ -4,13 +4,15 @@ require 'rsolr'
 require 'tilt'
 require 'debugger'
 
+PUBLICATION_YEARS = [2016]
+
 def cleanup(sentence)
   sentence.split.select{|w| w.match(/^[[:alpha:]]+$/)}.join(' ')
 end
 
-url = 'http://localhost:8983/solr/metastore'
+url = ENV['SOLR_URL'] || 'http://localhost:8983/solr/metastore'
 
-filters = ['format:article', 'access_ss:dtu', 'pub_date_tis:2015']
+filters = ['format:article', 'access_ss:dtu', "pub_date_tis:(#{PUBLICATION_YEARS.join(' OR ')})"]
 fields  = 'id,title_ts,journal_title_ts,conf_title_ts,author_ts,affiliation_ts,pub_date_tis,journal_vol_ssf,journal_issue_ssf,journal_page_ssf,cluster_id_ss,source_id_ss'
 
 departments = {}
