@@ -1,8 +1,8 @@
-affiliation:(technical university lyngby) OR
-affiliation:(technical university denmark)
+affiliation:("technical university lyngby") OR
+affiliation:("technical university denmark")
 
 
 affiliation:(DTU)
 
 
-affiliation:(Danmarks Tekniske Universitet)
+affiliation:("Danmarks Tekniske Universitet")
