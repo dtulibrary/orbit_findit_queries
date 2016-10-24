@@ -93,14 +93,20 @@ if ARGV.count > 0
 
       author_words = authors.map{|a| a.split(',').first}[0..10] || []
 
-      q = ""
-      q += " title_ts:(#{cleanup(title)})"
-      q += " author_ts:(#{author_words.join(' ')})" 
-      q += " journal_title_ts:(#{cleanup(journal_title)})" if !journal_title.blank?
-      q += " conf_title_ts:(#{cleanup(conf_title)})" if !conf_title.blank?
+      clean_title = cleanup(title)
+      mm = clean_title.split.length > 5 ? "75%" : "100%"
+
+      q = "title_txt_stop:(#{clean_title})"
+
+      # XXX: The q parameter was built like this for Solr 4:
+      #q = ""
+      #q += " title_ts:(#{cleanup(title)})"
+      #q += " author_ts:(#{author_words.join(' ')})"
+      #q += " journal_title_ts:(#{cleanup(journal_title)})" if !journal_title.blank?
+      #q += " conf_title_ts:(#{cleanup(conf_title)})" if !conf_title.blank?
       doc[:query] = q
 
-      result = solr.get('toshokan', :params => {:fq => filters + ['source_ss:orbit'], :q => q, 'q.op' => 'OR', :mm => '75%', :qf => '*', :rows => 1, :sort => 'score desc', :fl => fields})
+      result = solr.get('toshokan', :params => {:fq => filters + ['source_ss:orbit'], :q => q, 'q.op' => 'AND', :mm => mm, :qf => '*', :rows => 1, :sort => 'score desc', :fl => fields})
       doc[:duplicate] = result['response']['docs'].first
       doc[:has_duplicate] = (doc[:duplicate] ? 0 : 1)
       doc[:author_words] = author_words
